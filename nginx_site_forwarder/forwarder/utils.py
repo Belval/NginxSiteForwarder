@@ -27,7 +27,7 @@ def add_config(forwarding):
     conf = NGINX_CONF_TEMPLATE.replace("[SUBDOMAIN]", forwarding.subdomain)
     conf = conf.replace("[DESTINATION]", forwarding.destination)
 
-    with open(f"/etc/nginx/conf.d/{forwarding.subdomain}.belval.conf", "w") as f:
+    with open("/etc/nginx/conf.d/" + forwarding.subdomain + ".belval.conf", "w") as f:
         f.write(conf)
 
 def remove_config(forwarding):
@@ -35,4 +35,4 @@ def remove_config(forwarding):
     Deletes an Nginx config
     """
 
-    os.remove(f"/etc/nginx/conf.d/{forwarding.subdomain}.belval.conf")
+    os.remove("/etc/nginx/conf.d/" + forwarding.subdomain + ".belval.conf")
