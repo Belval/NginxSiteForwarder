@@ -22,6 +22,7 @@ def create_or_save(sender, instance, raw, using, update_fields, **kwargs):
     run_certbot()
     print("Restarting nginx")
     restart_nginx()
+    print("Done")
 
 
 @receiver(pre_delete, sender=Forwarding)
@@ -30,3 +31,4 @@ def delete(sender, instance, **kwargs):
     remove_config(instance)
     print("Restarting nginx")
     restart_nginx()
+    print("Done")
