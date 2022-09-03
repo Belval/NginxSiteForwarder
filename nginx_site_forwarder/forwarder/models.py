@@ -16,12 +16,17 @@ class ForwardingAdmin(admin.ModelAdmin):
 
 @receiver(pre_save, sender=Forwarding)
 def create_or_save(sender, instance, raw, using, update_fields, **kwargs):
+    print("Adding config")
     add_config(instance)
+    print("Running certbot")
     run_certbot()
+    print("Restarting nginx")
     restart_nginx()
 
 
 @receiver(pre_delete, sender=Forwarding)
 def delete(sender, instance, **kwargs):
+    print("Remove config")
     remove_config(instance)
+    print("Restarting nginx")
     restart_nginx()
